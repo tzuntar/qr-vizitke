@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@700&family=Signika:wght@400;500&display=swap');
+
+:root {
+    /* Please define colors, shadows, etc. here */
+    --font-color: #3d3d3d;
+    --heading-color: #000;
+    --placeholder-color: rgba(63, 63, 63, 0.6);
+    --input-field-background: #f9f9f9;
+    --purple-gradient: linear-gradient(273.28deg, #B300D0 0%, #FF00C7 100%);
+    --button-dark-color: #3d3d3d;
+    --button-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+body {
+    font-family: 'Signika', sans-serif;
+    color: var(--font-color);
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Signika Negative', sans-serif;
+    font-weight: 700;
+    color: var(--heading-color);
+}
+
+/* Buttons */
+
+button,
+input[type='submit'] {
+    color: white;
+    background: var(--button-dark-color);
+    box-shadow: var(--button-shadow);
+    border-radius: 26px;
+    border: none;
+    width: 213px;
+    height: 51px;
+    font-family: 'Signika', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+input[type='submit'] {
+    background: var(--purple-gradient);
+}
+
+/* Text Fields */
+
+input[type='text'],
+input[type='password'],
+input[type='tel'],
+input[type='email'],
+textarea {
+    /* Add border when selected to the input fields! */
+    background-color: var(--input-field-background);
+    border-radius: 12px;
+    border: none;
+    color: var(--heading-color);
+    font-family: 'Signika', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    width: 304px;
+    height: 37px;
+    padding: 2px 10px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--placeholder-color);
+}
+
+/* Links */
+
+a,
+a:hover,
+a:active,
+a:visited {
+    color: var(--font-color);
+    text-decoration: none;
+    font-family: 'Signika', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+}
