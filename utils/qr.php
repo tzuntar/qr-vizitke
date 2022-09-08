@@ -6,6 +6,7 @@
  * @param string $bgColor optional hexadecimal background color
  * (defaults to #F9F9F9)
  * @return string the resulting QR code in an <svg> tag
+ * @example echo makeQR("PNK-384927934-234f323e-2349");
  */
 function makeQR(string $data, string $bgColor = 'F9F9F9'): string
 {
@@ -18,5 +19,3 @@ function makeQR(string $data, string $bgColor = 'F9F9F9'): string
     curl_close($curl);
     return $response;
 }
-
-// example usage: echo makeQR("PNK-384927934-234f323e-2349");

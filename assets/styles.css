@@ -15,6 +15,8 @@ body {
     font-family: 'Signika', sans-serif;
     color: var(--font-color);
     text-align: center;
+    padding: 20px;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -62,8 +64,8 @@ textarea {
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
-    width: 304px;
-    height: 37px;
+    width: 90%;
+    height: 42px;
     padding: 2px 10px;
 }
 
@@ -86,4 +88,72 @@ a:visited {
     font-size: 20px;
     line-height: 25px;
     text-align: center;
+}
+
+/* Other Controls */
+
+.icon {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.small-icon {
+    width: 30px;
+    vertical-align: middle;
+}
+
+/* Top Bar */
+.top-bar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
+.top-bar:not(:first-child) {
+    text-align: center;
+    z-index: 11;
+    display: inline;
+}
+
+.top-bar img {
+    z-index: 10;
+    float: left;
+    vertical-align: middle;
+}
+
+/* Misc Utility Classes */
+
+.bottom {
+    width: 100%;
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+}
+
+.w-60 {
+    padding: 0 4rem;
+}
+
+.w-80 {
+    padding: 0 2rem;
+}
+
+.m-tb-1 {
+    margin: .5rem 0;
+}
+
+.m-tb-2 {
+    margin: 2rem 0;
+}
+
+/* Desktops */
+@media screen and (min-width: 1000px) {
+    input[type='text'],
+    input[type='password'],
+    input[type='tel'],
+    input[type='email'],
+    textarea {
+        width: 300px;
+    }
 }
