@@ -5,7 +5,37 @@ $document_title = 'Ustvari račun';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
 
 if (isset($_POST['username'])) {
+    if (empty($_POST['name_surname'])
+        or empty($_POST['phone']
+            or empty($_POST['password'])
+            or empty($_POST['confirm_password']))) {
+        $registerMessage = 'Izpolnite vsa obvezna polja';
+    } else {
+        $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        if (!password_verify($_POST['confirm_password'], $password_hash)) {
+            $registerMessage = 'Gesli se morata ujemati';
+        } else {
+            $name = filter_input(INPUT_POST, 'name_surname',
+                FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $username = filter_input(INPUT_POST, 'username',
+                FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $phone = filter_input(INPUT_POST, 'phone',
+                FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+            $user = db_create_user($name, $username, $phone, $password_hash);
+            if (!$user) {
+                $registerMessage = 'Ustvarjanje novega uporabniškega računa spodletelo';
+                return;
+            } else {
+                $_SESSION['id'] = $user['id_user'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['identifier'] = $user['identifier'];
+                $_SESSION['name_surname'] = $user['name_surname'];
+                $_SESSION['is_admin'] = $user['is_admin'];
+                header('Location: index.php');
+            }
+        }
+    }
 }
 
 include_once './include/header.php' ?>
@@ -49,7 +79,7 @@ include_once './include/header.php' ?>
         </p>
         <p>
             <label>
-                <input class="m-tb-1" type="tel" name="username" required
+                <input class="m-tb-1" type="tel" name="phone" required
                        placeholder="Telefon"/>
             </label>
         </p>

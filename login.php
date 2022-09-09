@@ -16,7 +16,7 @@ if (isset($_POST['username'])) {
             $_SESSION['id'] = $user['id_user'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['identifier'] = $user['identifier'];
-            $_SESSION['name'] = $user['name'];
+            $_SESSION['name_surname'] = $user['name_surname'];
             $_SESSION['is_admin'] = $user['is_admin'];
             header('Location: index.php');
         } else $loginMessage = 'Napačno uporabniško ime ali geslo';
