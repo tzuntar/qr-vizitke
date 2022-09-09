@@ -11,11 +11,17 @@ include_once './include/header.php' ?>
     <h1>Prijatelj na klik</h1>
     <a href="account.php"><img src="./assets/img/user.svg" alt="Uporabniški račun"/></a>
 </div>
-<div class="user-card">
+<div class="user-card card-more-padding">
     <div class="qr-code">
         <?= makeQR('PNK-' . $_SESSION['identifier']); ?>
     </div>
     <p class="accent-text"><?= $_SESSION['name_surname'] ?></p>
     <p><?= $_SESSION['username'] ?></p>
+</div>
+<div class="m-tb-3">
+    <a href="scan.php"><button>Preberi kodo</button></a>
+</div>
+<div class="bottom">
+    <a class="action-link" href="contacts.php">Moji stiki →</a>
 </div>
 <?php include_once './include/footer.php' ?>

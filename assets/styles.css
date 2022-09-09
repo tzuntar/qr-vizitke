@@ -107,6 +107,10 @@ a:visited {
     margin: 20px auto 0 auto;
 }
 
+.card-more-padding {
+    padding: 20px 20px;
+}
+
 .user-card .qr-code {
     margin: 10px;
 }
@@ -182,6 +186,14 @@ a:visited {
 
 .m-tb-2 {
     margin: 2rem 0;
+}
+
+.m-tb-3 {
+    margin: 4rem 0;
+}
+
+.m-tb-4 {
+    margin: 6rem 0;
 }
 
 .m-bottom-1 {
