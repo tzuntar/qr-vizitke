@@ -15,7 +15,7 @@ body {
     font-family: 'Signika', sans-serif;
     color: var(--font-color);
     text-align: center;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     overflow-x: hidden;
 }
 
@@ -74,6 +74,11 @@ textarea::placeholder {
     color: var(--placeholder-color);
 }
 
+textarea {
+    max-width: 310px;
+    height: 120px;
+}
+
 /* Links */
 
 a,
@@ -108,18 +113,17 @@ a:visited {
     position: sticky;
     top: 0;
     background-color: white;
+    display: flex;
+    align-items: center;
 }
 
 .top-bar:not(:first-child) {
-    text-align: center;
-    z-index: 11;
-    display: inline;
+
 }
 
 .top-bar img {
-    z-index: 10;
-    float: left;
     vertical-align: middle;
+    padding-right: 20px;
 }
 
 /* Misc Utility Classes */
@@ -145,6 +149,14 @@ a:visited {
 
 .m-tb-2 {
     margin: 2rem 0;
+}
+
+.m-bottom-1 {
+    margin-bottom: .5rem;
+}
+
+.m-bottom-2 {
+    margin-bottom: 2rem;
 }
 
 /* Desktops */

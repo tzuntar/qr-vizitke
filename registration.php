@@ -14,7 +14,7 @@ include_once './include/header.php' ?>
         <a href="login.php"><img src="./assets/img/back.svg" alt="Nazaj"/></a>
         <h1>Ustvari račun</h1>
     </div>
-    <p class="m-tb-2 w-80">
+    <p class="m-bottom-2 w-80">
         <?php if (isset($registrationMessage)) { ?>
             <img class="small-icon" src="./assets/img/warning.svg" alt="Napaka">&nbsp;<?= $registrationMessage ?>
         <?php } else { ?>
@@ -58,11 +58,9 @@ include_once './include/header.php' ?>
                 <textarea name="bio" placeholder="O meni"></textarea>
             </label>
         </p>
-        <input class="m-tb-2" type="submit" value="Prijava"/>
-        <div class="bottom">
-            <p>Podatke lahko kasneje spremenite v<br/>
-                nastavitvah uporabniškega računa</p>
-        </div>
+        <p>Podatke lahko kasneje spremenite v<br/>
+            nastavitvah uporabniškega računa</p>
+        <input class="m-tb-2" type="submit" value="Naprej"/>
     </form>
     </body>
 <?php include_once './include/footer.php' ?>
