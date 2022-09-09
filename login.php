@@ -24,7 +24,6 @@ if (isset($_POST['username'])) {
 }
 
 include_once './include/header.php' ?>
-    <body>
     <img class="icon" src="./assets/img/icon.svg" alt="Icon"/>
     <h1>Prijatelj na klik</h1>
     <p class="m-tb-2 w-80">
@@ -55,5 +54,4 @@ include_once './include/header.php' ?>
             Ustvarite si ga tukaj</p>
         <a class="action-link" href="registration.php">Ustvari račun →</a>
     </div>
-    </body>
 <?php include_once './include/footer.php' ?>

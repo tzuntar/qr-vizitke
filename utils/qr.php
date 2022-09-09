@@ -8,8 +8,7 @@
  * @return string the resulting QR code in an <svg> tag
  * @example echo makeQR("PNK-384927934-234f323e-2349");
  */
-function makeQR(string $data, string $bgColor = 'F9F9F9'): string
-{
+function makeQR(string $data, string $bgColor = 'F9F9F9'): string {
     $curl = curl_init();
     curl_setopt_array($curl, [
         CURLOPT_URL => "http://api.qrserver.com/v1/create-qr-code/?data=$data&size=200x200&format=svg&bgcolor=$bgColor",
@@ -17,5 +16,6 @@ function makeQR(string $data, string $bgColor = 'F9F9F9'): string
     ]);
     $response = curl_exec($curl);
     curl_close($curl);
-    return $response;
+    // rtrim because of a bug resulting in a stray '1' at the end of the tag
+    return rtrim($response, '1');
 }

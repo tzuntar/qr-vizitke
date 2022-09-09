@@ -75,7 +75,6 @@ textarea::placeholder {
 }
 
 textarea {
-    max-width: 310px;
     height: 120px;
 }
 
@@ -93,6 +92,36 @@ a:visited {
     font-size: 20px;
     line-height: 25px;
     text-align: center;
+}
+
+/* User Cards */
+.user-card {
+    background-color: var(--input-field-background);
+    border-radius: 12px;
+    font-family: 'Signika', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    width: 220px;
+    padding: 10px 10px;
+    margin: 20px auto 0 auto;
+}
+
+.user-card .qr-code {
+    margin: 10px;
+}
+
+.user-card p {
+    margin: 0;
+}
+
+.accent-text {
+    background: var(--purple-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.75rem;
+    font-family: 'Signika Negative', sans-serif;
+    font-weight: 700;
 }
 
 /* Other Controls */
@@ -117,13 +146,17 @@ a:visited {
     align-items: center;
 }
 
-.top-bar:not(:first-child) {
-
+.has-right {
+    justify-content: space-between;
 }
 
 .top-bar img {
     vertical-align: middle;
     padding-right: 20px;
+}
+
+.has-right img {
+    padding-right: 0;
 }
 
 /* Misc Utility Classes */

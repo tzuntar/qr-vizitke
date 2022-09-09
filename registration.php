@@ -39,7 +39,6 @@ if (isset($_POST['username'])) {
 }
 
 include_once './include/header.php' ?>
-    <body>
     <div class="top-bar">
         <a href="login.php"><img src="./assets/img/back.svg" alt="Nazaj"/></a>
         <h1>Ustvari račun</h1>
@@ -92,5 +91,4 @@ include_once './include/header.php' ?>
             nastavitvah uporabniškega računa</p>
         <input class="m-tb-2" type="submit" value="Naprej"/>
     </form>
-    </body>
 <?php include_once './include/footer.php' ?>
