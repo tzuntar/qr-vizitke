@@ -5,7 +5,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
 
 $user = db_get_user($_SESSION['id']);
 $place = db_get_place($user['id_place']);
-db_update_file_path($_SESSION['id']);
+if (isset($_FILES['fileToUpload']['name']))
+    db_update_file_path($_SESSION['id']);
 
 include_once './include/header.php' ?>
     <div class="top-bar has-right">

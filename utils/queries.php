@@ -63,10 +63,12 @@ function db_get_place(int $place_id){
 function db_update_file_path(int $user_id){
     global $DB;
     $target_dir = "uploads/";
+    if (!file_exists($target_dir))  // because it doesn't exist in the source package
+        mkdir($target_dir);
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
+    move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file);
     $stmt = $DB->prepare('UPDATE users SET image_path = ? WHERE id_user = ?');
     $stmt->execute([$target_file, $user_id]);
 }
