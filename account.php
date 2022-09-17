@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
 
 $user = db_get_user($_SESSION['id']);
 $place = db_get_place($user['id_place']);
+db_update_file_path($_SESSION['id']);
 
 include_once './include/header.php' ?>
     <div class="top-bar has-right">
@@ -13,6 +14,10 @@ include_once './include/header.php' ?>
     </div>
     <div class="user-card card-more-padding">
         <div class="qr-code">
+            <form method="post" enctype="multipart/form-data">
+                <input type="file" name="fileToUpload">
+                <input type="submit" value="nalozi">
+            </form>
             <img src="//" alt="Napaka">  <?//nisem našel poti do slik ?>
         </div>
         <p class="accent-text"><?= $_SESSION['name_surname'] ?></p>

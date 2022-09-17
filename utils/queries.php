@@ -59,3 +59,14 @@ function db_get_place(int $place_id){
         return false;   // place not found / invalid
     return $reqUser->fetch();
 }
+
+function db_update_file_path(int $user_id){
+    global $DB;
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+    $stmt = $DB->prepare('UPDATE users SET image_path = ? WHERE id_user = ?');
+    $stmt->execute([$target_file, $user_id]);
+}
