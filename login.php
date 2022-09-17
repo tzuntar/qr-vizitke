@@ -11,7 +11,7 @@ if (isset($_POST['username'])) {
     if (empty($username) or empty($password))
         $loginMessage = 'Vnesite oboje, uporabniško ime in geslo';
     else {
-        $user = db_get_user($username);
+        $user = db_get_user_by_username($username);
         if ($user and password_verify($password, $user['password'])) {
             $_SESSION['id'] = $user['id_user'];
             $_SESSION['username'] = $user['username'];

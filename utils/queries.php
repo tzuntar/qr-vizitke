@@ -6,11 +6,26 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/include/database.php';
  * @param string $username the username to look up
  * @return false|mixed the record or false if the query fails
  */
-function db_get_user(string $username) {
+function db_get_user_by_username(string $username) {
     global $DB;
     $reqUser = $DB->prepare('SELECT u.* FROM users u
         WHERE (u.username = ?)');
     $reqUser->execute([$username]);
+    if ($reqUser->rowCount() != 1)
+        return false;   // user not found / invalid
+    return $reqUser->fetch();
+}
+
+/**
+ * Retrieve this user's record
+ * @param int $userId user's database ID
+ * @return false|mixed the record or false if the query fails
+ */
+function db_get_user(int $userId) {
+    global $DB;
+    $reqUser = $DB->prepare('SELECT u.* FROM users u
+        WHERE (u.id_user = ?)');
+    $reqUser->execute([$userId]);
     if ($reqUser->rowCount() != 1)
         return false;   // user not found / invalid
     return $reqUser->fetch();
@@ -31,7 +46,7 @@ function db_create_user(string $name_surname, string $username, string $phone,
                    phone, password, identifier) VALUES (?, ?, ?, ?, ?)');
     $success = $stmt->execute([$name_surname, $username, $phone, $password_hash, uniqid()]);
     if ($success)
-        return db_get_user($username);
+        return db_get_user_by_username($username);
     return false;
 }
 
