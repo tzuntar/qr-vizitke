@@ -34,3 +34,13 @@ function db_create_user(string $name_surname, string $username, string $phone,
         return db_get_user($username);
     return false;
 }
+
+function db_get_place(int $place_id){
+    global $DB;
+    $reqUser = $DB->prepare('SELECT p.* FROM places p
+        WHERE (p.id_place = ?)');
+    $reqUser->execute([$place_id]);
+    if ($reqUser->rowCount() != 1)
+        return false;   // place not found / invalid
+    return $reqUser->fetch();
+}
