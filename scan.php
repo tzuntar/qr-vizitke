@@ -15,7 +15,8 @@ include_once './include/header.php' ?>
     </div>
     <script>
         function onScanSuccess(decodedText) {
-            location.href = `profile.php?user=${decodedText.substring(4)}&source=qr`;
+            location.href = `contact.php?user=${decodedText.substring(4)}&source=qr`;
+            html5QrcodeScanner.stop();
         }
 
         function onScanFailure(error) {

@@ -18,6 +18,21 @@ function db_get_user_by_username(string $username) {
 
 /**
  * Retrieve this user's record
+ * @param string $identifier the user's identifier to look up
+ * @return false|mixed the record or false if the query fails
+ */
+function db_get_user_by_identifier(string $identifier) {
+    global $DB;
+    $reqUser = $DB->prepare('SELECT u.* FROM users u
+        WHERE (u.identifier = ?)');
+    $reqUser->execute([$identifier]);
+    if ($reqUser->rowCount() != 1)
+        return false;   // user not found / invalid
+    return $reqUser->fetch();
+}
+
+/**
+ * Retrieve this user's record
  * @param int $userId user's database ID
  * @return false|mixed the record or false if the query fails
  */
@@ -50,7 +65,7 @@ function db_create_user(string $name_surname, string $username, string $phone,
     return false;
 }
 
-function db_get_place(int $place_id){
+function db_get_place(int $place_id) {
     global $DB;
     $reqUser = $DB->prepare('SELECT p.* FROM places p
         WHERE (p.id_place = ?)');
@@ -60,14 +75,14 @@ function db_get_place(int $place_id){
     return $reqUser->fetch();
 }
 
-function db_update_file_path(int $user_id){
+function db_update_file_path(int $user_id) {
     global $DB;
     $target_dir = "uploads/";
     if (!file_exists($target_dir))  // because it doesn't exist in the source package
         mkdir($target_dir);
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file);
     $stmt = $DB->prepare('UPDATE users SET image_path = ? WHERE id_user = ?');
     $stmt->execute([$target_file, $user_id]);

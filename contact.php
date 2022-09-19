@@ -1,19 +1,21 @@
 <?php
 session_start();
-$document_title = 'Moj profil';
+$document_title = 'Stik';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
+
 if (!isset($_SESSION['id']))
     header('Location: login.php');
-
-$user = db_get_user($_SESSION['id']);
+if (!isset($_GET['user']))
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+$user = db_get_user_by_identifier(ltrim($_GET['user'], 'PNK-'));
+if (!isset($user['id_user']))
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 $place = db_get_place($user['id_place']);
-if (isset($_FILES['fileToUpload']['name']))
-    db_update_file_path($_SESSION['id']);
 
 include_once './include/header.php' ?>
     <div class="top-bar">
         <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><img src="./assets/img/back.svg" alt="Nazaj"/></a>
-        <h1>Moj profil</h1>
+        <h1>Stik</h1>
     </div>
     <div class="user-card card-more-padding">
         <div class="profile-pic">
@@ -38,13 +40,7 @@ include_once './include/header.php' ?>
             </div>
         </div>
     </div>
-    <div class="m-tb-3">
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="fileToUpload">
-            <input type="submit" value="nalozi">
-        </form>
-    </div>
     <div class="bottom">
-        <a class="action-link" href="contacts.php">Moji stiki →</a>
+        <a href="contact.php?id=<?= $_GET['id'] ?>&action=save"><button>Shrani med stike</button></a>
     </div>
 <?php include_once './include/footer.php' ?>
