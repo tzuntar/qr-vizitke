@@ -6,11 +6,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
 if (!isset($_SESSION['id']))
     header('Location: login.php');
 if (!isset($_GET['user']))
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: scan.php');
 $user = db_get_user_by_identifier(ltrim($_GET['user'], 'PNK-'));
 if (!isset($user['id_user']))
     header('Location: ' . $_SERVER['HTTP_REFERER']);
-$place = db_get_place($user['id_place']);
+if (isset($user['id_place']))
+    $place = db_get_place($user['id_place']);
 
 include_once './include/header.php' ?>
     <div class="top-bar">
@@ -21,8 +22,8 @@ include_once './include/header.php' ?>
         <div class="profile-pic">
             <img src="<?= $user['image_path'] ?? '/assets/img/user_large.svg' ?>" alt="Slika uporabnika"/>
         </div>
-        <p class="accent-text"><?= $_SESSION['name_surname'] ?></p>
-        <p><?= $_SESSION['username'] ?></p>
+        <p class="accent-text"><?= $user['name_surname'] ?></p>
+        <p><?= $user['username'] ?></p>
     </div>
     <div class="m-tb-3">
         <div class="userdata-table">
@@ -35,12 +36,14 @@ include_once './include/header.php' ?>
                 <p>Telefon:</p>
             </div>
             <div>
-                <p><strong><?= $place['name'] ?></strong></p>
-                <p><strong><?= $user['phone'] ?></strong></p>
+                <p><strong><?= $place['name'] ?? 'vesolju' ?></strong></p>
+                <p><strong><?= $user['phone'] ?? '' ?></strong></p>
             </div>
         </div>
     </div>
     <div class="bottom">
-        <a href="contact.php?id=<?= $_GET['id'] ?>&action=save"><button>Shrani med stike</button></a>
+        <a href="contact.php?id=<?= $_GET['id'] ?>&action=save">
+            <button>Shrani med stike</button>
+        </a>
     </div>
 <?php include_once './include/footer.php' ?>
