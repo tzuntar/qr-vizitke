@@ -65,6 +65,12 @@ function db_create_user(string $name_surname, string $username, string $phone,
     return false;
 }
 
+function db_add_user_contacts(int $userId, int $targetUserId): bool {
+    global $DB;
+    $stmt = $DB->prepare('INSERT INTO friendships (id_user1, id_user2) VALUES (?, ?)');
+    return $stmt->execute([$userId, $targetUserId]);
+}
+
 function db_get_place(int $place_id) {
     global $DB;
     $reqUser = $DB->prepare('SELECT p.* FROM places p

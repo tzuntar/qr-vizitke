@@ -2,7 +2,6 @@
 session_start();
 $document_title = 'Stik';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
-
 if (!isset($_SESSION['id']))
     header('Location: login.php');
 if (!isset($_GET['user']))
@@ -10,6 +9,13 @@ if (!isset($_GET['user']))
 $user = db_get_user_by_identifier(ltrim($_GET['user'], 'PNK-'));
 if (!isset($user['id_user']))
     header('Location: ' . $_SERVER['HTTP_REFERER']);
+
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'save')
+        db_add_user_contacts($_SESSION['id'], $user['id_user']);
+    header('Location: contact.php?user=' . $_GET['user']);
+}
+
 if (isset($user['id_place']))
     $place = db_get_place($user['id_place']);
 
@@ -42,7 +48,7 @@ include_once './include/header.php' ?>
         </div>
     </div>
     <div class="bottom">
-        <a href="contact.php?id=<?= $_GET['id'] ?>&action=save">
+        <a href="contact.php?user=<?= $user['identifier'] ?>&action=save">
             <button>Shrani med stike</button>
         </a>
     </div>
