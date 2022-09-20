@@ -21,7 +21,7 @@ if (isset($user['id_place']))
 
 include_once './include/header.php' ?>
     <div class="top-bar">
-        <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><img src="./assets/img/back.svg" alt="Nazaj"/></a>
+        <a href="index.php"><img src="./assets/img/back.svg" alt="Nazaj"/></a>
         <h1>Stik</h1>
     </div>
     <div class="user-card card-more-padding">
@@ -45,6 +45,9 @@ include_once './include/header.php' ?>
                 <p><strong><?= $place['name'] ?? 'vesolju' ?></strong></p>
                 <p><strong><?= $user['phone'] ?? '' ?></strong></p>
             </div>
+        </div>
+        <div class="light-border fake-text-area m-top-3">
+            <p><?= $user['bio'] ?></p>
         </div>
     </div>
     <div class="bottom">

@@ -148,6 +148,11 @@ a:visited {
     justify-content: space-around;
 }
 
+.light-border {
+    border: 3px solid var(--input-field-background);
+    border-radius: 12px;
+}
+
 /* Other Controls */
 
 .icon {
@@ -158,6 +163,11 @@ a:visited {
 .small-icon {
     width: 30px;
     vertical-align: middle;
+}
+
+.fake-text-area {
+    text-align: left;
+    padding: 0 14px;
 }
 
 /* Top Bar */
@@ -211,6 +221,10 @@ a:visited {
 
 .m-tb-4 {
     margin: 6rem 0;
+}
+
+.m-top-3 {
+    margin-top: 4rem;
 }
 
 .m-bottom-1 {
