@@ -93,3 +93,12 @@ function db_update_file_path(int $user_id) {
     $stmt = $DB->prepare('UPDATE users SET image_path = ? WHERE id_user = ?');
     $stmt->execute([$target_file, $user_id]);
 }
+
+function db_get_friendship(int $user_id){
+    global $DB;
+    $reqUser = $DB->prepare('SELECT f.* FROM friendships f
+        WHERE (f.id_user1 = ?)');
+    $reqUser->execute([$user_id]);
+    $friend = $DB->prepare('SELECT u.* FROM users u WHERE ');
+    return $reqUser->fetch();
+}
