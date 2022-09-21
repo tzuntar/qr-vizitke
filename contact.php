@@ -16,6 +16,7 @@ if (isset($_GET['action'])) {
     header('Location: contact.php?user=' . $_GET['user']);
 }
 
+$isContact = db_user_is_contact($_SESSION['id'], $user['id_user']);
 if (isset($user['id_place']))
     $place = db_get_place($user['id_place']);
 
@@ -51,8 +52,12 @@ include_once './include/header.php' ?>
         </div>
     </div>
     <div class="bottom">
-        <a href="contact.php?user=<?= $user['identifier'] ?>&action=save">
-            <button>Shrani med stike</button>
-        </a>
+        <?php if (!$isContact) { ?>
+            <a href="contact.php?user=<?= $user['identifier'] ?>&action=save">
+                <button>Shrani med stike</button>
+            </a>
+        <?php } else { ?>
+            <button disabled>Stik že dodan</button>
+        <?php } ?>
     </div>
 <?php include_once './include/footer.php' ?>

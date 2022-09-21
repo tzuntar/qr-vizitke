@@ -71,6 +71,14 @@ function db_add_user_contacts(int $userId, int $targetUserId): bool {
     return $stmt->execute([$userId, $targetUserId]);
 }
 
+function db_user_is_contact(int $userId, int $targetUserId): bool {
+    global $DB;
+    $stmt = $DB->prepare('SELECT id_friendship FROM friendships WHERE id_user1 = ? AND id_user2 = ?');
+    if (!$stmt->execute([$userId, $targetUserId]))
+        return false;
+    return $stmt->rowCount() > 0;
+}
+
 function db_get_place(int $place_id) {
     global $DB;
     $reqUser = $DB->prepare('SELECT p.* FROM places p
@@ -94,11 +102,12 @@ function db_update_file_path(int $user_id) {
     $stmt->execute([$target_file, $user_id]);
 }
 
-function db_get_friendship(int $user_id){
+function db_get_friendship(int $user_id) {
     global $DB;
-    $reqUser = $DB->prepare('SELECT f.* FROM friendships f
-        WHERE (f.id_user1 = ?)');
-    $reqUser->execute([$user_id]);
-    $friend = $DB->prepare('SELECT u.* FROM users u WHERE ');
+    $reqUser = $DB->prepare('SELECT u.* FROM users u
+        INNER JOIN friendships f ON f.id_user2 = u.id_user
+        WHERE f.id_user1 = ?');
+    if (!$reqUser->execute([$user_id]))
+        return false;
     return $reqUser->fetch();
 }
