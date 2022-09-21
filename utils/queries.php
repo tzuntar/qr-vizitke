@@ -65,9 +65,16 @@ function db_create_user(string $name_surname, string $username, string $phone,
     return false;
 }
 
-function db_add_user_contacts(int $userId, int $targetUserId): bool {
+function db_add_user_contact(int $userId, int $targetUserId): bool {
     global $DB;
     $stmt = $DB->prepare('INSERT INTO friendships (id_user1, id_user2) VALUES (?, ?)');
+    return $stmt->execute([$userId, $targetUserId]);
+}
+
+function db_remove_user_contact(int $userId, int $targetUserId): bool {
+    global $DB;
+    $stmt = $DB->prepare('DELETE FROM friendships
+       WHERE (id_user1 = ?) AND (id_user2 = ?)');
     return $stmt->execute([$userId, $targetUserId]);
 }
 

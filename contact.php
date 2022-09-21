@@ -8,11 +8,13 @@ if (!isset($_GET['user']))
     header('Location: scan.php');
 $user = db_get_user_by_identifier(ltrim($_GET['user'], 'PNK-'));
 if (!isset($user['id_user']))
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: index.php');
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'save')
-        db_add_user_contacts($_SESSION['id'], $user['id_user']);
+        db_add_user_contact($_SESSION['id'], $user['id_user']);
+    elseif ($_GET['action'] == 'remove')
+        db_remove_user_contact($_SESSION['id'], $user['id_user']);
     header('Location: contact.php?user=' . $_GET['user']);
 }
 
@@ -48,16 +50,12 @@ include_once './include/header.php' ?>
             </div>
         </div>
         <div class="light-border fake-text-area m-top-3">
-            <p><?= $user['bio'] ?></p>
+            <p><?= $user['bio'] ?? '<i>Brez opisa</i>' ?></p>
         </div>
     </div>
     <div class="bottom">
-        <?php if (!$isContact) { ?>
-            <a href="contact.php?user=<?= $user['identifier'] ?>&action=save">
-                <button>Shrani med stike</button>
-            </a>
-        <?php } else { ?>
-            <button disabled>Stik že dodan</button>
-        <?php } ?>
+        <a href="contact.php?user=<?= $user['identifier'] ?>&action=<?= $isContact ? 'remove' : 'save' ?>">
+            <button><?= $isContact ? 'Odstrani iz stikov' : 'Shrani med stike' ?></button>
+        </a>
     </div>
 <?php include_once './include/footer.php' ?>
