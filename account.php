@@ -5,10 +5,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
 if (!isset($_SESSION['id']))
     header('Location: login.php');
 
+if (isset($_POST['place'])) {
+    if (isset($_FILES['fileToUpload']['name'])) {
+        db_update_file_path($_SESSION['id']);
+    }
+    $place = filter_input(INPUT_POST, 'place', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $bio = filter_input(INPUT_POST, 'bio', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    db_update_user($_SESSION['id'], $place, $phone, $bio);
+}
 $user = db_get_user($_SESSION['id']);
 $place = db_get_place($user['id_place']);
-if (isset($_FILES['fileToUpload']['name']))
-    db_update_file_path($_SESSION['id']);
 
 include_once './include/header.php' ?>
     <div class="top-bar">
@@ -22,28 +29,34 @@ include_once './include/header.php' ?>
         <p class="accent-text"><?= $_SESSION['name_surname'] ?></p>
         <p><?= $_SESSION['username'] ?></p>
     </div>
-    <div class="m-tb-3">
-        <div class="userdata-table">
-            <div>
-                <img src="/assets/img/home.svg" alt=""/>
-                <img src="/assets/img/phone.svg" alt=""/>
-            </div>
-            <div>
-                <p>Doma v:</p>
-                <p>Telefon:</p>
-            </div>
-            <div>
-                <p><strong><?= $place['name'] ?></strong></p>
-                <p><strong><?= $user['phone'] ?></strong></p>
-            </div>
+    <form method="post" enctype="multipart/form-data" class="account-data-form">
+        <div class="m-tb-3">
+            <p>
+                <label>
+                    <input type="text" name="place" placeholder="Kraj bivanja" required
+                           value="<?= $place['name'] ?? '' ?>"/>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="tel" name="phone" placeholder="Telefonska številka" required
+                           value="<?= $user['phone'] ?? '' ?>"/>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <textarea name="bio" placeholder="Opis" required><?= $user['bio'] ?? '' ?></textarea>
+                </label>
+            </p>
         </div>
-    </div>
-    <div class="m-tb-3">
-        <form method="post" enctype="multipart/form-data">
+        <div class="m-tb-3">
+            <p>Spremeni svojo sliko</p>
             <input type="file" name="fileToUpload">
-            <input type="submit" value="nalozi">
-        </form>
-    </div>
+        </div>
+        <div class="m-tb-3">
+            <input type="submit" value="Shrani"/>
+        </div>
+    </form>
     <div class="bottom">
         <a class="action-link" href="contacts.php">Moji stiki →</a>
     </div>

@@ -47,6 +47,43 @@ function db_get_user(int $userId) {
 }
 
 /**
+ * Update the database data for this user
+ * @param int $userId the user's existing database ID
+ * @param string $place updated place name
+ * @param string $phone updated phone number
+ * @param string $bio updated bio
+ * @return bool whether the update succeeded
+ */
+function db_update_user(int $userId, string $place, string $phone, string $bio): bool {
+    global $DB;
+    $placeId = get_or_create_place($place);
+    if (!$placeId) return false;
+    $stmt = $DB->prepare('UPDATE users SET id_place = ?, phone = ?, bio = ?
+        WHERE id_user = ?');
+    return $stmt->execute([$placeId, $phone, $bio, $userId]);
+}
+
+/**
+ * Retrieves this place by name or creates it in the database if it
+ * doesn't exist yet
+ * @param string $place name of the place
+ * @return false|mixed resulting database record or false if the query fails
+ */
+function get_or_create_place(string $place) {
+    global $DB;
+    $reqPlace = $DB->prepare('SELECT id_place FROM places WHERE name = ?');
+    if (!$reqPlace->execute([$place]))
+        return false;
+    if ($reqPlace->rowCount() > 0)
+        return $reqPlace->fetch()['id_place'];
+    // če pride sem, predpostavljamo, da kraja še ni v bazi
+    $stmt = $DB->prepare('INSERT INTO places (name) VALUES (?)');
+    if ($stmt->execute([$place]))
+        return get_or_create_place($place); // kliči sam sebe, če se tu zalomi, smo v kaši
+    return false;
+}
+
+/**
  * Create the user in the database and return their record
  * @param string $name_surname the user's full name
  * @param string $username the user's username
@@ -104,9 +141,10 @@ function db_update_file_path(int $user_id) {
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file);
-    $stmt = $DB->prepare('UPDATE users SET image_path = ? WHERE id_user = ?');
-    $stmt->execute([$target_file, $user_id]);
+    if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
+        $stmt = $DB->prepare('UPDATE users SET image_path = ? WHERE id_user = ?');
+        $stmt->execute([$target_file, $user_id]);
+    }
 }
 
 function db_get_friendship(int $user_id) {

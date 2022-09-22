@@ -117,6 +117,11 @@ a:visited {
     margin: 10px;
 }
 
+.user-card .profile-pic img {
+    width: 200px;
+    border-radius: 12px;
+}
+
 .user-card p {
     margin: 0;
 }
@@ -128,6 +133,12 @@ a:visited {
     font-size: 1.75rem;
     font-family: 'Signika Negative', sans-serif;
     font-weight: 700;
+}
+
+.account-data-form input[type='text'],
+.account-data-form input[type='tel'],
+.account-data-form textarea {
+    width: 240px;
 }
 
 /* Tables & Data */
