@@ -5,6 +5,7 @@ if (!isset($_SESSION['username']))
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/qr.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/config.php';
 
 include_once './include/header.php' ?>
 <div class="top-bar has-right">
@@ -13,7 +14,7 @@ include_once './include/header.php' ?>
 </div>
 <div class="user-card card-more-padding">
     <div class="qr-code">
-        <?= makeQR('PNK-' . $_SESSION['identifier']); ?>
+        <?= makeQR($TOP_LEVEL . '/contact.php?user=' . $_SESSION['identifier']); ?>
     </div>
     <p class="accent-text"><?= $_SESSION['name_surname'] ?></p>
     <p><?= $_SESSION['username'] ?></p>

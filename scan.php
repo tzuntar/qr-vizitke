@@ -3,6 +3,7 @@ session_start();
 $document_title = 'Preberi kodo';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/queries.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/config.php';
 
 include_once './include/header.php' ?>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
@@ -15,7 +16,8 @@ include_once './include/header.php' ?>
     </div>
     <script>
         function onScanSuccess(decodedText) {
-            location.href = `contact.php?user=${decodedText.substring(4)}&source=qr`;
+            const idStringStart = '<?= $TOP_LEVEL . '/contact.php?user=' ?>'.length;
+            location.href = `contact.php?user=${decodedText.substring(idStringStart)}&source=qr`;
             html5QrcodeScanner.stop();
         }
 
