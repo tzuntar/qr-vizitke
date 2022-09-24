@@ -55,7 +55,7 @@ include_once './include/header.php' ?>
     </div>
     <div class="bottom">
         <a href="contact.php?user=<?= $user['identifier'] ?>&action=<?= $isContact ? 'remove' : 'save' ?>">
-            <button><?= $isContact ? 'Odstrani iz stikov' : 'Shrani med stike' ?></button>
+            <button><?= $isContact ? 'Odstrani stik' : 'Dodaj stik' ?></button>
         </a>
     </div>
 <?php include_once './include/footer.php' ?>
