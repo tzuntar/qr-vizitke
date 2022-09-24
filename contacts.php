@@ -17,8 +17,7 @@ include_once './include/header.php' ?>
                 uporabnika">
                 <div class="description">
                     <h2><a href='contact.php?user=<?= $f['identifier'] ?>'><?= $f['name_surname'] ?></a></h2>
-                    <p>Dodan/-a dne <?= date('d. m. Y', strtotime($f['added_on'])) ?> • <a
-                                href='contact.php?user=<?= $f['identifier'] ?>'>Podrobnosti →</a></p>
+                    <p>Dodan/-a dne <?= date('d. m. Y', strtotime($f['added_on'])) ?></p>
                 </div>
             </div>
         <?php } ?>
