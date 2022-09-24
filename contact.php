@@ -24,7 +24,7 @@ if (isset($user['id_place']))
 
 include_once './include/header.php' ?>
     <div class="top-bar">
-        <a href="index.php"><img src="./assets/img/back.svg" alt="Nazaj"/></a>
+        <a href="<?= $_SERVER['HTTP_REFERER'] ?? 'index.php' ?>"><img src="./assets/img/back.svg" alt="Nazaj"/></a>
         <h1>Stik</h1>
     </div>
     <div class="user-card card-more-padding">

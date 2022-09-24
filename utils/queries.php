@@ -149,10 +149,10 @@ function db_update_file_path(int $user_id) {
 
 function db_get_friendship(int $user_id) {
     global $DB;
-    $reqUser = $DB->prepare('SELECT u.* FROM users u
+    $reqUser = $DB->prepare('SELECT u.*, f.added_on FROM users u
         INNER JOIN friendships f ON f.id_user2 = u.id_user
         WHERE f.id_user1 = ?');
     if (!$reqUser->execute([$user_id]))
         return false;
-    return $reqUser->fetch();
+    return $reqUser->fetchAll();
 }

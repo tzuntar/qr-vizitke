@@ -9,6 +9,7 @@
     --purple-gradient: linear-gradient(273.28deg, #B300D0 0%, #FF00C7 100%);
     --button-dark-color: #3d3d3d;
     --button-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    --separator: rgba(63, 63, 63, 60%);
 }
 
 body {
@@ -19,7 +20,7 @@ body {
     overflow-x: hidden;
 }
 
-h1 {
+h1, h2 {
     font-family: 'Signika Negative', sans-serif;
     font-weight: 700;
     color: var(--heading-color);
@@ -124,6 +125,37 @@ a:visited {
 
 .user-card p {
     margin: 0;
+}
+
+.contact-list .profile-pic {
+    width: 60px;
+    border-radius: 10px;
+    float: left;
+    margin-right: 20px;
+}
+
+.contact-entry > * {
+    vertical-align: middle;
+}
+
+.contact-entry {
+    padding-bottom: 5px;
+    text-align: left;
+    border-bottom: 1px solid var(--separator);
+}
+
+.contact-entry h2 {
+    margin-bottom: 0;
+}
+
+.contact-entry h2 a {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.contact-entry a {
+    color: var(--heading-color);
+    font-size: 16px;
 }
 
 .accent-text {
