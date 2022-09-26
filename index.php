@@ -24,5 +24,10 @@ include_once './include/header.php' ?>
 </div>
 <div class="bottom">
     <a class="action-link" href="contacts.php">Moji stiki →</a>
+    <?php if ($_SESSION['is_admin']) { ?>
+        <p>
+            <a class="action-link" href="/admin/users.php">Administracija →</a>
+        </p>
+    <?php } ?>
 </div>
 <?php include_once './include/footer.php' ?>
