@@ -15,7 +15,8 @@ if (isset($_POST['place'])) {
     db_update_user($_SESSION['id'], $place, $phone, $bio);
 }
 $user = db_get_user($_SESSION['id']);
-$place = db_get_place($user['id_place']);
+if (isset($user['id_place']))
+    $place = db_get_place($user['id_place']);
 
 include_once './include/header.php' ?>
     <div class="top-bar">

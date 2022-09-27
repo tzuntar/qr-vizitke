@@ -25,7 +25,6 @@ if (isset($_POST['username'])) {
             $user = db_create_user($name, $username, $phone, $password_hash);
             if (!$user) {
                 $registerMessage = 'Ustvarjanje novega uporabniškega računa spodletelo';
-                return;
             } else {
                 $_SESSION['id'] = $user['id_user'];
                 $_SESSION['username'] = $user['username'];
