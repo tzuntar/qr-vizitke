@@ -20,7 +20,9 @@ include_once './include/header.php' ?>
     <p><?= $_SESSION['username'] ?></p>
 </div>
 <div class="m-tb-3">
-    <a href="scan.php"><button>Preberi kodo</button></a>
+    <a href="scan.php">
+        <button>Preberi kodo</button>
+    </a>
 </div>
 <div class="bottom">
     <a class="action-link" href="contacts.php">Moji stiki →</a>
@@ -29,5 +31,8 @@ include_once './include/header.php' ?>
             <a class="action-link" href="/admin/users.php">Administracija →</a>
         </p>
     <?php } ?>
+    <p>
+        <a class="action-link" href="logout.php">Odjava →</a>
+    </p>
 </div>
 <?php include_once './include/footer.php' ?>
