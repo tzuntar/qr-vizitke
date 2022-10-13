@@ -22,5 +22,8 @@ include_once './include/header.php' ?>
             </div>
         <?php } ?>
     </div>
+    <div class="bottom">
+        <a class="action-link" href="friendship_stats.php">Statistika stikov šole →</a>
+    </div>
 </div>
 <?php include_once './include/footer.php' ?>

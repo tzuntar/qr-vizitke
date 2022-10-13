@@ -156,3 +156,13 @@ function db_get_friendship(int $user_id) {
         return false;
     return $reqUser->fetchAll();
 }
+
+function db_get_friendship_stats_per_month(int $numMonths) {
+    global $DB;
+    $stmt = $DB->prepare('SELECT MONTH(added_on), COUNT(id_friendship) FROM friendships
+        WHERE (added_on >= DATE_SUB(now(), INTERVAL ? MONTH))
+        GROUP BY MONTH(added_on)');
+    if (!$stmt->execute([$numMonths]))
+        return false;
+    return $stmt->fetchAll();
+}
