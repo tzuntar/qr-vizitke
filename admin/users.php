@@ -19,4 +19,6 @@ global $DB;
 $lm = new lazy_mofo($DB, 'en-us');
 $lm->table = 'users';
 $lm->identity_name = 'id_user';
+$lm->form_input_control['image_path'] = ['type' => 'image'];
+$lm->grid_output_control['image_path'] = ['type' => 'image'];
 $lm->run();

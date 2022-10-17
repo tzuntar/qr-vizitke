@@ -151,7 +151,7 @@ class lazy_mofo{
 
     // relative paths for image or documents uploads
     // all paths are created at runtime as needed
-    public $upload_path = 'uploads';            // required when using input types
+    public $upload_path = '../uploads';            // required when using input types
     public $thumb_path = 'thumbs';              // optional, leave blank if you don't need thumbnails
 
     // newly added absolute paths, 2019-09
